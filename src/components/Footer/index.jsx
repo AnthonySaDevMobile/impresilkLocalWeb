@@ -4,6 +4,7 @@ import {
   FaArrowAltCircleRight,
   FaFacebook,
   FaInstagram,
+  FaPinterest,
 } from "react-icons/fa";
 import { MdCall, MdEmail, MdLocationPin } from "react-icons/md";
 import Logo from "../../assets/logo.png";
@@ -54,21 +55,25 @@ function Footer() {
             </div>
             <div className="flex gap-1 text-base px-2 items-center mt-5">
               <MdEmail color="yellow" size={20} />
-              <p>contact@impresilk.com</p>
+              <p>contato@impresilk.com</p>
             </div>
             <div className="flex gap-1 text-base px-2 items-center mt-5">
               <MdCall color="yellow" size={20} />
-              <p>(38) 98877-6655</p>
+              <p>(38) 3223-4577</p>
             </div>
           </div>
           <div>
             <h1 className="mt-5 mb-5 font-semibold text-center">
               Redes Sociais
             </h1>
-            <div className="flex gap-2 py-2 justify-around w-1/2 m-auto">
+            <div className="flex gap-2 items-center py-2 justify-around w-1/2 m-auto">
 
               <a href="https://www.facebook.com/impresilk" target="_blank">
                 <FaFacebook color="#8e8e8e" size={20} />
+              </a>
+
+              <a href="https://www.facebook.com/impresilk" target="_blank">
+                <FaPinterest color="#8e8e8e" size={20} />
               </a>
 
               <a href="https://www.instagram.com/impresilk/" target="_blank">
