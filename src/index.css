@@ -108,7 +108,6 @@ html{
 
 .seu-modal {
   position: absolute !important;
-  top: 60% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
   background-color: white !important;
@@ -119,7 +118,9 @@ html{
   text-align: center !important;
   border-radius: 2rem !important;
   overflow-y: auto !important;
+  top: 50% !important;
 }
+
 
 .modal-title {
   font-size: 24px !important;
