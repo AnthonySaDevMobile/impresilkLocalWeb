@@ -98,11 +98,11 @@ const ScrollCasesHorizontal = () => {
         </div>
 
         <div className="w-full h-full absolute top-0 flex opacity-0 hover:opacity-100 items-center justify-center transition-opacity duration-500">
-          <a href="">
+      
             <p className="text-center bg-blue-800 px-14 py-3 rounded-3xl text-white text-sm mt-10 font-bold sm:drop-shadow-3xl drop-shadow-md">
               BOOK
             </p>
-          </a>
+          
         </div>
       </div>
     </div>
