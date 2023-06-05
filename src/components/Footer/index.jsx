@@ -48,7 +48,7 @@ function Footer() {
                 <FaFacebook color="#8e8e8e" size={20} />
               </a>
 
-              <a href="https://www.facebook.com/impresilk" target="_blank">
+              <a href="https://br.pinterest.com/impresilksolucoesvisuais/" target="_blank">
                 <FaPinterest color="#8e8e8e" size={20} />
               </a>
 
