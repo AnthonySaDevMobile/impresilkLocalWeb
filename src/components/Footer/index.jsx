@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   FaArrowAltCircleRight,
   FaFacebook,
@@ -9,7 +9,6 @@ import {
 import { MdCall, MdEmail, MdLocationPin } from "react-icons/md";
 import Logo from "../../assets/logo.png";
 
-import axios from "axios";
 
 function Footer() {
 
@@ -32,7 +31,7 @@ function Footer() {
             </div>
             <div className="flex gap-1 text-base px-2 items-center mt-5">
               <MdEmail color="yellow" size={20} />
-              <p>contato@impresilk.com</p>
+              <p>site@impresilk.com</p>
             </div>
             <div className="flex gap-1 text-base px-2 items-center mt-5">
               <MdCall color="yellow" size={20} />
