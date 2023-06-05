@@ -68,7 +68,8 @@ function Footer() {
             <p>Impresilk</p>
           </a>
           <a
-            href="/#footer"
+            href="https://api.whatsapp.com/send/?phone=553832235477&text&type=phone_number&app_absent=0"
+            target="_blank"
             className="flex items-center gap-2 border-t border-zinc-800 mt-2 pt-2 hover:ml-5 hover:bg-zinc-800 hover:text-white p-2 transition-all duration-500"
           >
             <FaArrowAltCircleRight />
