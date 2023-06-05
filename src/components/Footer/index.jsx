@@ -25,13 +25,12 @@ function Footer() {
             <div className="flex gap-2 text-base px-2 items-center mt-5">
               <MdLocationPin color="yellow" size={30} />
               <p>
-                Av. Felíciano Martins de Freitas, 127 - Vila Regina, Montes
-                Claros - MG
+              Av. Feliciano Martins de Freitas, 127 - Vila Regina, Montes Claros - MG
               </p>
             </div>
             <div className="flex gap-1 text-base px-2 items-center mt-5">
               <MdEmail color="yellow" size={20} />
-              <p>site@impresilk.com</p>
+              <p>site@impresilk.com.br</p>
             </div>
             <div className="flex gap-1 text-base px-2 items-center mt-5">
               <MdCall color="yellow" size={20} />
