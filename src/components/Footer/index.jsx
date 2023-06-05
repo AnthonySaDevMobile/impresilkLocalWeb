@@ -12,36 +12,13 @@ import Logo from "../../assets/logo.png";
 import axios from "axios";
 
 function Footer() {
-  const [feedList, setFeedList] = useState([]);
-
-  async function getInstaFeed() {
-    try {
-      const fields = "media_url, media_type,permalink";
-      const response = await axios.get(
-        `https://graph.instagram.com/me/media`,
-        {
-          params: {
-            access_token: process.env.IMPRESILK_TOKEN,
-            fields,
-          },
-        }
-      );
-      setFeedList(response.data.data);
-    } catch (error) {
-      console.log("error:", error);
-    }
-  }
-
-  useEffect(() => {
-    getInstaFeed();
-  }, []);
 
 
   return (
     <footer className="w-full sm:h-fit pt-5 bg-bg-black-ct text-white">
       <div className="sm:w-7/12 sm:m-auto pl-5 pb-2 flex justify-between">
         <div className="sm:w-5/12  flex flex-col justify-start text-left sm:pb-20 pt-5">
-          <img src={Logo} alt="logo" className="md:mt-0 mt-2 h-1/4 w-28" />
+          <img src={Logo} alt="logo" className="md:mt-0 mt-2 h-1/4 w-32" />
           <p className="text-zinc-500 mt-5">
             A Impresilk é uma empresa familiar que nasceu há mais de 30 anos, dá vontade e união dos três irmãos, Adilson Pereira, Anita Pereira e Pedro Ramos Pereira, de empreenderem. Iniciaram o seu negócio na cidade de São Francisco, a 167 km de Montes Claros, sendo a primeira empresa de serigrafia do Norte de Minas Gerais. Com o crescimento da empresa, os irmãos mudaram para Montes Claros e começaram a reescrever a história da Impresilk.
           </p>

@@ -29,7 +29,7 @@ export default function Header() {
             height={80}
             alt="logo"
             onClick={() => {}}
-            className="w-24 sm:w-32"
+            className="w-28 sm:w-32"
           />
         </a>
 
