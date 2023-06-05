@@ -35,7 +35,7 @@ function Footer() {
             </div>
             <div className="flex gap-1 text-base px-2 items-center mt-5">
               <MdCall color="yellow" size={20} />
-              <p>(38) 3223-4577</p>
+              <p>(38) 3223-5477</p>
             </div>
           </div>
           <div>
