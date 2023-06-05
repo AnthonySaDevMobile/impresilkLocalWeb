@@ -5,13 +5,13 @@ import { getStorage, ref } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAIZ0JQcNcUvay9OkMM9r8VM2iXTNwYLUI",
-  authDomain: "adminimpresilk.firebaseapp.com",
-  projectId: "adminimpresilk",
-  storageBucket: "adminimpresilk.appspot.com",
-  messagingSenderId: "48515276076",
-  appId: "1:48515276076:web:a38386447a4deee698e089",
-  measurementId: "G-SZ1W39WZED"
+  apiKey: "AIzaSyC5W8ci283pepwak-xjzUZ1vtAfNDjY_6Y",
+  authDomain: "cpimpresilk.firebaseapp.com",
+  projectId: "cpimpresilk",
+  storageBucket: "cpimpresilk.appspot.com",
+  messagingSenderId: "531505868005",
+  appId: "1:531505868005:web:38c1bdb44c444edb5eb80c",
+  measurementId: "G-XKGR1CX84D"
 };
 
 
