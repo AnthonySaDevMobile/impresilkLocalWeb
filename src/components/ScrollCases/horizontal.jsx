@@ -15,6 +15,7 @@ const ScrollCasesHorizontal = () => {
   const casesCollectionRef = collection(db, "cases");
   const [cases, setCases] = useState([]);
   const [casesForBox, setCasesForBox] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const getDepoiments = async () => {
@@ -30,7 +31,13 @@ const ScrollCasesHorizontal = () => {
 
     getDepoiments();
   }, []);
-
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
+  }, [isOpen]);
   function handleBox(index) {
     setCasesForBox(cases[index]);
   }
@@ -97,14 +104,68 @@ const ScrollCasesHorizontal = () => {
           </div>
         </div>
 
-        <div className="w-full h-full absolute top-0 flex opacity-0 hover:opacity-100 items-center justify-center transition-opacity duration-500">
-      
-            <p className="text-center bg-blue-800 px-14 py-3 rounded-3xl text-white text-sm mt-10 font-bold sm:drop-shadow-3xl drop-shadow-md">
-              BOOK
-            </p>
-          
+        <div onClick={() => setIsOpen(true)} className="w-full cursor-pointer h-full absolute top-0 flex opacity-0 hover:opacity-100 items-center justify-center transition-opacity duration-500">
+          <p className="text-center bg-blue-800 px-14 py-3 rounded-3xl text-white text-sm mt-10 font-bold sm:drop-shadow-3xl drop-shadow-md">
+            BOOK
+          </p>
         </div>
       </div>
+      {isOpen ? (
+  <div className="h-screen w-full fixed top-0 left-0 z-20 modal-container">
+    <div className="bg-black bg-opacity-[.98] h-full w-full z-0 flex flex-col items-center justify-start pt-24">
+      <div className="z-50 w-11/12 text-left py-5">
+        <button className="bg-red-500 p-2 rounded font-bold" onClick={() => setIsOpen(false)}>Fechar</button>
+      </div>
+      <div className="overflow-y-auto h-[calc(100%-120px)] scroll-container">
+        <h1 className="font-extrabold text-[2rem] text-center mb-10">{casesForBox?.nome} {casesForBox?.segundoNome}</h1>
+        <div className="flex flex-col gap-10 m-auto w-11/12">
+          <div className="bg-zinc-100 rounded">
+            <img
+              src={casesForBox?.imagem}
+              className="object-cover w-full h-full rounded opacity-100"
+            />
+          </div>
+          {casesForBox?.book && (
+            <div className="bg-zinc-100 rounded">
+              <img
+                src={casesForBox.book}
+                className="object-cover w-full h-full rounded opacity-100"
+              />
+            </div>
+          )}
+          {casesForBox?.book2 && (
+            <div className="bg-zinc-100 rounded">
+              <img
+                src={casesForBox.book2}
+                className="object-cover w-full h-full rounded opacity-100"
+              />
+            </div>
+          )}
+          {casesForBox?.book3 && (
+            <div className="bg-zinc-100 rounded">
+              <img
+                src={casesForBox.book3}
+                className="object-cover w-full h-full rounded opacity-100"
+              />
+            </div>
+          )}
+        </div>
+        <div className="flex flex-col gap-1 font-semibold mt-10 text-center text-xl text-zinc-500">
+          <span className="text-sm">Descrição:</span>
+          <p className="text-white">{casesForBox?.descricao}</p>
+          <spa className="mt-5 text-sm">Tempo de entrega:</spa>
+          <p className="text-white">{casesForBox?.tempo}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+) : (
+  <></>
+)}
+
+
+
+
     </div>
   );
 };

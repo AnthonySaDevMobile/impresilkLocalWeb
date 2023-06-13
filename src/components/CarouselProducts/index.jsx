@@ -199,7 +199,7 @@ export default function CarouselProducts() {
                 {item.descricao}
               </p>
               <a href="https://api.whatsapp.com/send/?phone=553832235477&text&type=phone_number&app_absent=0" target="_blank">
-              <button className="mt-5 bg-zinc-200 text-zinc-500 md:px-5 px-1 py-2 rounded-xl text-xs">
+              <button className="mt-5 z-20 bg-zinc-200 text-zinc-500 md:px-5 px-1 py-2 rounded-xl text-xs">
                 ORÇAMENTO
               </button>
               </a>

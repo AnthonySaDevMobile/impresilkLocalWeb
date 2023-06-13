@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaImage, FaPlayCircle, FaSearch, FaStar } from "react-icons/fa";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../services/firebaseConnection";
@@ -19,6 +19,7 @@ export default function Portfolio() {
   const [portfolioImages7, setPortfolioImages7] = useState([]);
   const [portfolioImages8, setPortfolioImages8] = useState([]);
   const [portfolioImages9, setPortfolioImages9] = useState([]);
+  const carouselRef = useRef(null);
   const [showCarousel, setShowCarousel] = useState(false);
   const allImages = [
     ...portfolioImages,
@@ -291,7 +292,9 @@ export default function Portfolio() {
           ))}
         </div>
         <button
-          onClick={() => setShowCarousel(true)}
+          onClick={() => {setShowCarousel(true)
+            carouselRef.current.scrollIntoView({ behavior: "smooth" });
+          }}
           className=" md:w-1/4 m-auto text-center bg-blue-800 px-14 py-3 rounded-3xl text-white text-sm mt-10 font-bold sm:drop-shadow-3xl drop-shadow-md mb-10"
         >
           VER TUDO
@@ -301,19 +304,24 @@ export default function Portfolio() {
         <Modal
           isOpen={isFullScreen}
           onRequestClose={() => setIsFullScreen(false)}
-          className="modal-overlay"
+          className="modal-overlay flex flex-col"
           overlayClassName="modal-backdrop"
         >
+        <div className="md:w-1/2 py-4">
+          <button onClick={()=>setIsFullScreen(false)} className="bg-red-500 w-fit p-2 text-white font-bold rounded">Fechar</button>
+        </div>
+        
           <img
             src={selectedImage.imagem}
             alt="image portfolio"
-            className="w-full h-full object-cover object-center"
+            className="md:w-1/2 w-11/12 h-4/5 object-cover object-center"
             onClick={() => setIsFullScreen(false)}
           />
         </Modal>
       )}
+
       {showCarousel && (
-        <div>
+        <div className="w-11/12 mx-auto"  ref={carouselRef}>
           <button
             onClick={() => setShowCarousel(false)}
             className="bg-red-500 px-4 py-1 my-5 rounded text-white font-semibold "
@@ -327,11 +335,11 @@ export default function Portfolio() {
             slidesToScroll={1}
           >
             {allImages.map((foto) => (
-              <div key={foto.id} className="relative w-full h-[700px]">
+              <div key={foto.id} className="relative w-full md:h-[80vh] h-[600px]">
                 <img
                   src={foto.imagem}
                   alt="image portfolio"
-                  className="w-full h-full absolute object-cover"
+                  className="w-full h-[600px] md:h-[70vh] absolute md:object-contain object-cover"
                   style={{ objectPosition: "center" }}
                 />
               </div>

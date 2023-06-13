@@ -20,6 +20,7 @@ html{
 	margin: 0;
 }
 
+
 .swiper-pagination-bullet-1{
   background-color: transparent !important;
   width: 25px !important;
@@ -148,4 +149,27 @@ html{
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+}
+
+.scroll-container {
+  overflow-y: auto !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: #888 #f1f1f1 !important;
+}
+
+.scroll-container::-webkit-scrollbar {
+  width: 2px !important;
+
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1 !important;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: yellow!important;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #555 !important;
 }
