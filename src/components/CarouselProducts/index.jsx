@@ -14,6 +14,8 @@ import { db } from "../../services/firebaseConnection";
 
 export default function CarouselProducts() {
   const produtosRef = collection(db, "produtos");
+  const categoriasRef = collection(db, "categorias");
+  const [categorias, setCategorias] = useState([]);
   const [produtos, setProdutos] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const [filtered, setFiltered] = useState(produtos);
@@ -32,34 +34,8 @@ export default function CarouselProducts() {
     getProdutos();
   }, []);
 
-  useEffect(() => {
-    handleCategoryChange(selectedCategory); // Passar a categoria selecionada como argumento
-  }, [selectedCategory]); // Alterar o nome do estado de "produtos" para "selectedCategory"
+ 
 
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-    const produtosFiltrados =
-      category === "Todos"
-        ? produtos
-        : produtos.filter((item) => {
-            if (category === "Outros") {
-              // Filtrar os produtos com nomes diferentes das outras categorias
-              return ![
-                "Acm",
-                "Lona",
-                "Vinil",
-                "Acrílico",
-                "Pvc",
-                "Neon",
-              ].includes(item.categoria);
-            } else {
-              // Filtrar os produtos pela categoria selecionada
-              return item.categoria === category;
-            }
-          });
-
-    setFiltered(produtosFiltrados);
-  };
 
   const pagination = {
     renderBullet: function (index, className) {
@@ -77,91 +53,48 @@ export default function CarouselProducts() {
     return chunks;
   }
 
+  useEffect(() => {
+    const getCategorias = async () => {
+      const data = await getDocs(categoriasRef);
+      setCategorias(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getCategorias();
+  }, []);
+
+  useEffect(() => {
+    handleCategoryChange(selectedCategory); // Passar a categoria selecionada como argumento
+  }, [selectedCategory]); // Alterar o nome do estado de "produtos" para "selectedCategory"
+  
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    const produtosFiltrados =
+      category === "Todos"
+        ? produtos
+        : produtos.filter((item) => item.categoria === category);
+  
+    setFiltered(produtosFiltrados);
+  };
+
+ 
+
   return (
     <div>
       <div className="flex items-center md:justify-end justify-around m:gap-4 gap-2 md:text-base text-xs h-8">
+      {categorias.map((categoria) => (
         <button
+          key={categoria.id}
           className={`${
-            selectedCategory === "Acm" || selectedCategory == "ACM"
+            selectedCategory === categoria.categoria
               ? "border-b-2 underline underline-offset-4 decoration-bg-slide transition ease-in text-zinc-900"
               : "hover:border-b-2 hover:underline hover:underline-offset-4 decoration-bg-slide transition ease-in text-zinc-500 hover:text-zinc-900"
           }`}
-          onClick={() => handleCategoryChange("Acm")}
+          onClick={() => handleCategoryChange(categoria.categoria)}
         >
-          Acm
+          {categoria.categoria}
         </button>
-        <button
-          className={`${
-            selectedCategory === "Lona"
-              ? "border-b-2 underline underline-offset-4 decoration-bg-slide transition ease-in text-zinc-900"
-              : "hover:border-b-2 hover:underline hover:underline-offset-4 decoration-bg-slide transition ease-in text-zinc-500 hover:text-zinc-900"
-          }`}
-          onClick={() => handleCategoryChange("Lona")}
-        >
-          Lona
-        </button>
-        <button
-          className={`${
-            selectedCategory === "Vinil"
-              ? "border-b-2 underline underline-offset-4 decoration-bg-slide transition ease-in text-zinc-900"
-              : "hover:border-b-2 hover:underline hover:underline-offset-4 decoration-bg-slide transition ease-in text-zinc-500 hover:text-zinc-900"
-          }`}
-          onClick={() => handleCategoryChange("Vinil")}
-        >
-          Vinil
-        </button>
-        <button
-          className={`${
-            selectedCategory === "Acrílico"
-              ? "border-b-2 underline underline-offset-4 decoration-bg-slide transition ease-in text-zinc-900"
-              : "hover:border-b-2 hover:underline hover:underline-offset-4 decoration-bg-slide transition ease-in text-zinc-500 hover:text-zinc-900"
-          }`}
-          onClick={() => handleCategoryChange("Acrílico")}
-        >
-          Acrílico
-        </button>
-        <button
-          className={`${
-            selectedCategory === "Pvc"
-              ? "border-b-2 underline underline-offset-4 decoration-bg-slide transition ease-in text-zinc-900"
-              : "hover:border-b-2 hover:underline hover:underline-offset-4 decoration-bg-slide transition ease-in text-zinc-500 hover:text-zinc-900"
-          }`}
-          onClick={() => handleCategoryChange("Pvc")}
-        >
-          Pvc
-        </button>
-        <button
-          className={`${
-            selectedCategory === "Neon"
-              ? "border-b-2 underline underline-offset-4 decoration-bg-slide transition ease-in text-zinc-900"
-              : "hover:border-b-2 hover:underline hover:underline-offset-4 decoration-bg-slide transition ease-in text-zinc-500 hover:text-zinc-900"
-          }`}
-          onClick={() => handleCategoryChange("Neon")}
-        >
-          Neon
-        </button>
-        <button
-          className={`${
-            selectedCategory === "Outros"
-              ? "border-b-2 underline underline-offset-4 decoration-bg-slide transition ease-in text-zinc-900"
-              : "hover:border-b-2 hover:underline hover:underline-offset-4 decoration-bg-slide transition ease-in text-zinc-500 hover:text-zinc-900"
-          }`}
-          onClick={() => handleCategoryChange("Outros")}
-        >
-          Outros
-        </button>
+      ))}
+    </div>
 
-        <button
-          className={`${
-            selectedCategory === "Todos"
-              ? "border-b-2 underline underline-offset-4 decoration-bg-slide transition ease-in text-zinc-900"
-              : "hover:border-b-2 hover:underline hover:underline-offset-4 decoration-bg-slide transition ease-in text-zinc-500 hover:text-zinc-900"
-          }`}
-          onClick={() => handleCategoryChange("Todos")}
-        >
-          Todos
-        </button>
-      </div>
       <Swiper
         navigation={{
           prevEl: ".prev",

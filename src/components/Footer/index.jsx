@@ -1,17 +1,40 @@
-"use client";
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import {
   FaArrowAltCircleRight,
   FaFacebook,
   FaInstagram,
   FaPinterest,
-} from "react-icons/fa";
-import { MdCall, MdEmail, MdLocationPin } from "react-icons/md";
-import Logo from "../../assets/logo.png";
+} from 'react-icons/fa';
+import { MdCall, MdEmail, MdLocationPin } from 'react-icons/md';
+import Logo from '../../assets/logo.png';
+import axios from 'axios';
 
+const Footer = () => {
+  const [feedList, setFeedList] = useState([]);
+  async function getInstaFeed() {
+    try {
+      const response = await axios.get(
+        'https://www.instagram.com/graphql/query/',
+        {
+          params: {
+            query_id: '17888483320059182',
+            variables: '{"id":"1464317481","first":5,"after":null}'
+          }
+        }
+      );
+      const { data } = response.data;
+      const posts = data.user.edge_owner_to_timeline_media.edges.map(
+        (edge) => edge.node
+      );
+      setFeedList(posts);
+    } catch (error) {
+      console.log('error:', error);
+    }
+  }
 
-function Footer() {
-
+  useEffect(() => {
+    getInstaFeed();
+  }, []);
 
   return (
     <footer className="w-full sm:h-fit pt-5 bg-bg-black-ct text-white">
@@ -25,7 +48,7 @@ function Footer() {
             <div className="flex gap-2 text-base px-2 items-center mt-5">
               <MdLocationPin color="yellow" size={30} />
               <p>
-              Av. Feliciano Martins de Freitas, 127 - Vila Regina, Montes Claros - MG
+                Av. Feliciano Martins de Freitas, 127 - Vila Regina, Montes Claros - MG
               </p>
             </div>
             <div className="flex gap-1 text-base px-2 items-center mt-5">
@@ -42,16 +65,13 @@ function Footer() {
               Redes Sociais
             </h1>
             <div className="flex gap-2 items-center py-2 justify-around w-1/2 m-auto">
-
-              <a href="https://www.facebook.com/impresilk" target="_blank">
+              <a href="https://www.facebook.com/impresilk" target="_blank" rel="noopener noreferrer">
                 <FaFacebook color="#8e8e8e" size={20} />
               </a>
-
-              <a href="https://br.pinterest.com/impresilksolucoesvisuais/" target="_blank">
+              <a href="https://br.pinterest.com/impresilksolucoesvisuais/" target="_blank" rel="noopener noreferrer">
                 <FaPinterest color="#8e8e8e" size={20} />
               </a>
-
-              <a href="https://www.instagram.com/impresilk/" target="_blank">
+              <a href="https://www.instagram.com/impresilk/" target="_blank" rel="noopener noreferrer">
                 <FaInstagram color="#8e8e8e" size={20} />
               </a>
             </div>
@@ -69,6 +89,7 @@ function Footer() {
           <a
             href="https://api.whatsapp.com/send/?phone=553832235477&text&type=phone_number&app_absent=0"
             target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-2 border-t border-zinc-800 mt-2 pt-2 hover:ml-5 hover:bg-zinc-800 hover:text-white p-2 transition-all duration-500"
           >
             <FaArrowAltCircleRight />
@@ -117,17 +138,45 @@ function Footer() {
             <p>Depoimentos</p>
           </a>
         </div>
+        <div className="mt-10 text-zinc-400 text-sm w-fit m-auto text-center hidden md:flex md:flex-col">
+          <h1 className="text-xl mb-5 text-white">
+            Atualizações do <strong className="font-bold ">instagram</strong>
+          </h1>
+
+          <div className="grid grid-cols-3 grid-rows-2  w-fit gap-3" >
+            <a href="https://www.instagram.com/impresilk/" target="_blank">
+              <div
+                className="bg-zinc-500 w-[150px] h-[135px] flex items-center justify-center object-cover hover:brightness-150 transiton-all duration-500"
+                style={{
+                  background:
+                    "radial-gradient(circle, rgba(176,0,172,1) 39%, rgba(252,70,107,1) 100%, rgba(241,70,252,1) 100%)",
+                }}
+              >
+                {" "}
+                <FaInstagram size={50} color="white" />{" "}
+              </div>
+            </a>
+           
+          </div>
+
+          <p className="text-left mt-5">
+            Siga-nos <strong className="text-yellow-500">@impresilk</strong>
+          </p>
+        </div>
+
 
       </div>
+
       <div className="bg-black text-xs py-8 h-full text-center">
         <p>
-          ©2023{" "}
+          ©2023{' '}
           <strong className="text-yellow-500 font-extrabold">impresilk </strong>
           all right reserved, made with❤by nobilismkt.com
         </p>
+        <button onClick={() => console.log(instagramImages)}>TESTEW</button>
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;

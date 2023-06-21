@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Scrollbar, Mousewheel } from "swiper";
-import "swiper/swiper-bundle.css";
-import { FaStar } from "react-icons/fa";
 import { collection, getDocs } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { FaStar } from "react-icons/fa";
+import SwiperCore, { Mousewheel, Scrollbar } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.css";
+import tag from "../../assets/tag.png";
 import { db } from "../../services/firebaseConnection";
-import tag from "../../assets/tag.png"
 
 SwiperCore.use([Scrollbar]);
 
@@ -118,56 +118,53 @@ const ScrollCasesVertical = () => {
         </div>
       </div>
       {isOpen ?
-        <div className="h-screen w-full fixed top-0 left-0 z-20 modal-container">
-          <div className="bg-black bg-opacity-[.80] h-full w-full z-0 flex flex-col items-center justify-start pt-40">
-            <div className="z-50 w-11/12 text-left py-5" >
-              <button className="bg-red-500 p-2 rounded font-bold" onClick={() => setIsOpen(false)}>Fechar</button>
+        <div className="h-screen w-full fixed top-0 left-0 z-20 modal-container" style={{ overflowY: 'auto' }}>
+        <div className="bg-black bg-opacity-[.80] h-fit w-full z-0 flex flex-col items-center justify-start pt-40 pb-10">
+          <div className="z-50 w-11/12 text-left py-5" >
+            <button className="bg-red-500 p-2 rounded font-bold" onClick={() => setIsOpen(false)}>Fechar</button>
+          </div>
+          <h1 className="font-extrabold text-[2rem] mb-10">{casesForBox?.nome} {casesForBox?.segundoNome}</h1>
+          <div className="grid gap-20 w-11/12" style={{ gridTemplateColumns: `repeat(auto-fit, minmax(200px, 1fr))` }}>
+            <div className="bg-zinc-100 rounded">
+              <img
+                src={casesForBox?.imagem}
+                className="object-cover w-full h-full rounded opacity-100"
+              />
             </div>
-            <h1 className="font-extrabold text-[2rem] mb-10">{casesForBox?.nome} {casesForBox?.segundoNome}</h1>
-            <div className="grid gap-20 w-11/12" style={{ gridTemplateColumns: `repeat(auto-fit, minmax(200px, 1fr))` }}>
-  <div className="bg-zinc-100 rounded">
-    <img
-      src={casesForBox?.imagem}
-      className="object-cover w-full h-full rounded opacity-100"
-    />
-  </div>
-  {casesForBox?.book && (
-    <div className="bg-zinc-100 rounded">
-      <img
-        src={casesForBox.book}
-        className="object-cover w-full h-full rounded opacity-100"
-      />
-    </div>
-  )}
-  {casesForBox?.book2 && (
-    <div className="bg-zinc-100 rounded">
-      <img
-        src={casesForBox.book2}
-        className="object-cover w-full h-full rounded opacity-100"
-      />
-    </div>
-  )}
-  {casesForBox?.book3 && (
-    <div className="bg-zinc-100 rounded">
-      <img
-        src={casesForBox.book3}
-        className="object-cover w-full h-full rounded opacity-100"
-      />
-    </div>
-  )}
-</div>
-
-
-            <div className="flex flex-col gap-1 font-semibold mt-10 text-center text-xl text-zinc-500">
-              <span className="text-sm">Descrição:</span>
-              <p className="text-white">{casesForBox?.descricao}</p>
-              <spa className="mt-5 text-sm">Tempo de entrega:</spa>
-              <p className="text-white">{casesForBox?.tempo}</p>
-            </div>
+            {casesForBox?.book && (
+              <div className="bg-zinc-100 rounded">
+                <img
+                  src={casesForBox.book}
+                  className="object-cover w-full h-full rounded opacity-100"
+                />
+              </div>
+            )}
+            {casesForBox?.book2 && (
+              <div className="bg-zinc-100 rounded">
+                <img
+                  src={casesForBox.book2}
+                  className="object-cover w-full h-full rounded opacity-100"
+                />
+              </div>
+            )}
+            {casesForBox?.book3 && (
+              <div className="bg-zinc-100 rounded">
+                <img
+                  src={casesForBox.book3}
+                  className="object-cover w-full h-full rounded opacity-100"
+                />
+              </div>
+            )}
+          </div>
+          <div className="flex flex-col gap-1 font-semibold mt-10 text-center text-xl text-zinc-500">
+            <span className="text-sm">Descrição:</span>
+            <p className="text-white">{casesForBox?.descricao}</p>
+            <spa className="mt-5 text-sm">Tempo de entrega:</spa>
+            <p className="text-white">{casesForBox?.tempo}</p>
           </div>
         </div>
-
-
+      </div>
+      
 
         : <></>}
 
