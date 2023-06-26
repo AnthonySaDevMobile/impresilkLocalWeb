@@ -119,7 +119,7 @@ const ScrollCasesVertical = () => {
       </div>
       {isOpen ?
         <div className="h-screen w-full fixed top-0 left-0 z-20 modal-container" style={{ overflowY: 'auto' }}>
-        <div className="bg-black bg-opacity-[.80] h-fit w-full z-0 flex flex-col items-center justify-start pt-40 pb-10">
+        <div className="bg-black bg-opacity-[.79] h-fit w-full z-0 flex flex-col items-center justify-start pt-40 pb-10">
           <div className="z-50 w-11/12 text-left py-5" >
             <button className="bg-red-500 p-2 rounded font-bold" onClick={() => setIsOpen(false)}>Fechar</button>
           </div>
